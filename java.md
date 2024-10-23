@@ -9,7 +9,7 @@
 -Dcom.sun.management.jmxremote.rmi.port=12345
 -Djava.rmi.server.hostname=10.1.2.3
 ```
-## Опции JVM для двунаправленного TLS с логином и паролем:
+## JVM options for bidirectional TLS with login and password:
 ```bash
 -Dcom.sun.management.jmxremote.access.file=pathto/jmxremote.access
 -Dcom.sun.management.jmxremote.authenticate=true #password and login authentication
@@ -26,8 +26,12 @@
 -Dcom.sun.management.jmxremote=true
 ```
 Sample of access file content:
+```
 jmxUsr readwrite
+```
 Sample of  password file content:
+```
 jmxUsr <password>
+```
 In order for it to work correctly, you need to run it under a separate user in a container and give file reading rights only to this
 user.
