@@ -165,11 +165,53 @@ StaffBranch(staffNo, sName, position , salary, branchNo, bAddress)
 
 ### 1NF
 
+Для того, чтобы таблица находилась в 1NF необходимо и достаточно, чтобы на пересечении любых столбца и строки находилось одно значение.
+Пример:  
+
+| clientNo | propertyNo | cName         | pAddress                      | rentStart  | rentFinish  | rent | ownerNo | oName        |
+|----------|------------|---------------|-------------------------------|------------|-------------|------|---------|--------------|
+| CR76     | PG4        | John Kay      | 6 Lawrence St, Glasgow        | 1-Jul-07   | 31-Aug-08   | 350  | CO40    | Tina Murphy  |
+| CR76     | PG16       | John Kay      | 5 Novar Dr, Glasgow           | 1-Sep-08   | 1-Sep-09    | 450  | CO93    | Tony Shaw    |
+| CR56     | PG4        | Aline Stewart | 6 Lawrence St, Glasgow        | 1-Sep-06   | 10-Jun-07   | 350  | CO40    | Tina Murphy  |
+| CR56     | PG36       | Aline Stewart | 2 Manor Rd, Glasgow           | 10-Oct-07  | 1-Dec-08    | 375  | CO93    | Tony Shaw    |
+| CR56     | PG16       | Aline Stewart | 5 Novar Dr, Glasgow           | 1-Nov-09   | 10-Aug-10   | 450  | CO93    | Tony Shaw    |
+
 
 ### 2NF
+Для того, чтобы таблица находилась в 2NF необходимо и достаточно, чтобы она была в 1NF и каждый не состоящий в потенциальном ключе атрибут полностью функционально зависит от любого потенциального ключа.  
+
+Можно использовать частную формулировку, заменив "потенциальный ключ" на "первичный ключ" и не рассматривать потенциальные ключи.
+
+#### Client
+
+| clientNo | cName         |
+|----------|---------------|
+| CR76     | John Kay      |
+| CR56     | Aline Stewart |
+
+#### Rental
+
+| clientNo | propertyNo | rentStart | rentFinish |
+|----------|------------|-----------|------------|
+| CR76     | PG4        | 1-Jul-07  | 31-Aug-08  |
+| CR76     | PG16       | 1-Sep-08  | 1-Sep-09   |
+| CR56     | PG4        | 1-Sep-06  | 10-Jun-07  |
+| CR56     | PG36       | 10-Oct-07 | 1-Dec-08   |
+| CR56     | PG16       | 1-Nov-09  | 10-Aug-10  |
+
+#### PropertyOwner
+
+| propertyNo | pAddress               | rent | ownerNo | oName       |
+|------------|-------------------------|------|---------|-------------|
+| PG4        | 6 Lawrence St, Glasgow  | 350  | CO40    | Tina Murphy |
+| PG16       | 5 Novar Dr, Glasgow     | 450  | CO93    | Tony Shaw   |
+| PG36       | 2 Manor Rd, Glasgow     | 375  | CO93    | Tony Shaw   |
 
 
 ### 3NF
+Для того, чтобы таблица находилась в 3NF необходимо и достаточно, чтобы она была в 1NF и 2NF и НИ ОДИН не состоящий в потенциальном ключе атрибут не зависел транзитивно от любого потенциального ключа.  
+
+Можно использовать частную формулировку, заменив "потенциальный ключ" на "первичный ключ" и не рассматривать потенциальные ключи.
 
 
 ### BCNF
