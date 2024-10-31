@@ -149,3 +149,30 @@ StaffBranch(staffNo, sName, position , salary, branchNo, bAddress)
 Атрибут(ы) B функционально зависит от A (A→B), если для любого потенциального значения атрибута(ов) A существует единственное значение B.  
 Атрибут B полностью функционально зависит от A, если A→B и не существует собственного подмножества атрибутов S ⊂ A, такого что S→B.  
 Если ∃ A→B и B→C и B↛A и C↛A, то A→C - транзитивная зависимость через B.  
+Детерминант функциональной зависимости A→B - это набор атрибутов A.  
+
+### UNF
+Это таблица с повтрояющимися значениями атрибутов.
+Например, 
+| clientNo | cName         | propertyNo | pAddress                      | rentStart  | rentFinish  | rent | ownerNo | oName        |
+|----------|---------------|------------|-------------------------------|------------|-------------|------|---------|--------------|
+| CR76     | John Kay      | PG4        | 6 Lawrence St, Glasgow        | 1-Jul-07   | 31-Aug-08   | 350  | CO40    | Tina Murphy  |
+|          |               | PG16       | 5 Novar Dr, Glasgow           | 1-Sep-08   | 1-Sep-09    | 450  | CO93    | Tony Shaw    |
+| CR56     | Aline Stewart | PG4        | 6 Lawrence St, Glasgow        | 1-Sep-06   | 10-Jun-07   | 350  | CO40    | Tina Murphy  |
+|          |               | PG36       | 2 Manor Rd, Glasgow           | 10-Oct-07  | 1-Dec-08    | 375  | CO93    | Tony Shaw    |
+|          |               | PG16       | 5 Novar Dr, Glasgow           | 1-Nov-09   | 10-Aug-10   | 450  | CO93    | Tony Shaw    |
+
+
+### 1NF
+
+
+### 2NF
+
+
+### 3NF
+
+
+### BCNF
+
+
+
