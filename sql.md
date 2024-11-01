@@ -213,6 +213,24 @@ StaffBranch(staffNo, sName, position , salary, branchNo, bAddress)
 
 Можно использовать частную формулировку, заменив "потенциальный ключ" на "первичный ключ" и не рассматривать потенциальные ключи.
 
+PropertyOwner не находится в 3NF из-за транзитивной зависимости:
+fd1: propertyNo → pAddress, rent, ownerNo, oName (Primary Key)
+fd2: ownerNo → oName (Transitive dependency)
+
+#### PropertyForRent
+
+| propertyNo | pAddress               | rent | ownerNo |
+|------------|-------------------------|------|---------|
+| PG4        | 6 Lawrence St, Glasgow  | 350  | CO40    |
+| PG16       | 5 Novar Dr, Glasgow     | 450  | CO93    |
+| PG36       | 2 Manor Rd, Glasgow     | 375  | CO93    |
+
+#### Owner
+
+| ownerNo | oName        |
+|---------|--------------|
+| CO40    | Tina Murphy  |
+| CO93    | Tony Shaw    |
 
 ### BCNF
 BCNF является более строгой формой, чем 3NF.
@@ -228,4 +246,43 @@ BCNF является более строгой формой, чем 3NF.
 Потенциальное нарушение BCNF может возникнуть, когда:
 1. отношение содержит два (или более) составных потенциального ключа ИЛИ
 1. потенциальные ключи перекрываются, то есть имеют по крайней мере один общий атрибут.
+
+В примере ниже представлена таблица интервью персонала с клиентами в привязке с помещением.
+Сотрудники, участвующие в собеседовании с клиентами, в день собеседования размещаются в определенной комнате. Однако, по мере необходимости в течение рабочего дня комната может быть выделена нескольким сотрудникам. Клиент проходит собеседование только один раз в определенный день, но его могут попросить посетить дополнительные собеседования в более поздние сроки.
+
+#### ClientInterview
+
+| clientNo | interviewDate | interviewTime | staffNo | roomNo |
+|----------|---------------|---------------|---------|--------|
+| CR76     | 13-May-09     | 10.30         | SG5     | G101   |
+| CR56     | 13-May-09     | 12.00         | SG5     | G101   |
+| CR74     | 13-May-09     | 12.00         | SG37    | G102   |
+| CR56     | 1-Jul-09      | 10.30         | SG5     | G102   |
+
+Тут имеются следующие функциональные зависимости:  
+fd1: clientNo, interviewDate → interviewTime, staffNo, roomNo (Primary key)  
+fd2: staffNo, interviewDate, interviewTime → clientNo (Candidate key)  
+fd3: roomNo, interviewDate, interviewTime → staffNo, clientNo (Candidate key)  
+fd4: staffNo, interviewDate → roomNo  
+
+В fd4 детерминант не является потенциальным ключом, что противоречит BCNF.
+Для соответствия нужно разбить таблички.
+
+#### Interview
+
+| clientNo | interviewDate | interviewTime | staffNo |
+|----------|---------------|---------------|---------|
+| CR76     | 13-May-09     | 10.30         | SG5     |
+| CR56     | 13-May-09     | 12.00         | SG5     |
+| CR74     | 13-May-09     | 12.00         | SG37    |
+| CR56     | 1-Jul-09      | 10.30         | SG5     |
+
+#### StaffRoom
+
+| staffNo | interviewDate | roomNo |
+|---------|---------------|--------|
+| SG5     | 13-May-09     | G101   |
+| SG37    | 13-May-09     | G102   |
+| SG5     | 1-Jul-09      | G102   |
+
 
